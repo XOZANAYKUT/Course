@@ -22,15 +22,14 @@ REVIEW_CHOICES = (
 class Course(models.Model):
     title = models.CharField(max_length=200, unique=True, verbose_name="Title")
     slug = models.SlugField(max_length=200, unique=True, verbose_name="URL Tag")
-    instructor = models.ForeignKey(User, on_delete=models.CASCADE, related_name="courses", verbose_name="Instructor")
-    description = models.TextField(verbose_name="Course Description")
+    author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="courses", verbose_name="Instructor")
     content = models.TextField(verbose_name="Course Content")
     date = models.DateField(verbose_name="Course Date")
     duration = models.CharField(max_length=20, choices=DURATION_CHOICES, verbose_name="Course Duration")
     review = models.IntegerField(choices=REVIEW_CHOICES, verbose_name="Course Rating")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="Creation Date")
     status = models.IntegerField(choices=STATUS_CHOICES, default=0, verbose_name="Status")
-    category = models.CharField(max_length=100, verbose_name="Category")
+    excerpt = models.TextField(blank=True)
 
     class Meta:
         verbose_name = "Course"
