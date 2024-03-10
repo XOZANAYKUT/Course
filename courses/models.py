@@ -15,13 +15,14 @@ class Course(models.Model):
     slug = models.SlugField(max_length=200, unique=True, verbose_name="URL Tag")
     author = models.ForeignKey(
         User, on_delete=models.CASCADE, related_name="courses_posts", default=1
-    )  # Varsayılan olarak, kullanıcı kimliği 1 olan bir kullanıcıyı ata.
+    )  # By default, assign a user with user ID 1.
     content = models.TextField(verbose_name="Course Content")
     date = models.DateField(verbose_name="Course Date")
     duration = models.CharField(max_length=20, choices=DURATION_CHOICES, verbose_name="Course Duration")
     created_on = models.DateTimeField(auto_now_add=True, verbose_name="Creation Date")
     status = models.IntegerField(choices=STATUS_CHOICES, default=0, verbose_name="Status")
     excerpt = models.TextField(blank=True)
+    updated_on = models.DateTimeField(auto_now=True)
 
     class Meta:
         verbose_name = "Course"
